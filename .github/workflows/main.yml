@@ -32,8 +32,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: v0.${{ GITHUB_RUN_NUMBER }}
-        release_name: Release v0.${{ GITHUB_RUN_NUMBER }}
+        tag_name: v0.${{ github.run_id }}
+        release_name: Release v0.${{ github.run_id }}
         draft: false
         prerelease: false
       if: github.ref == 'refs/heads/main'
@@ -45,6 +45,6 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./dist/pg_creds
-        asset_name: artifact-name
+        asset_name: pg_creds
         asset_content_type: application/octet-stream
       if: github.ref == 'refs/heads/main'
